@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    restart: always
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodbdata:/data/db
+    networks:
+      - mern-net
+  server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: backendv1
+    container_name: backendc1
+    ports:
+      - "4040:4040"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mongodb
+    networks:
+      - mern-net
+  client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: client1
+    container_name: clientc1
+    ports:
+      - "0:3030"
+    volumes:
+      - ./frontend/src:/app
+    depends_on:
+      - server
+    networks:
+      - mern-net
+
+volumes:
+  mongodbdata:
+networks:
+  mern-net:

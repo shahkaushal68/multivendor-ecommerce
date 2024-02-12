@@ -1,0 +1,12 @@
+.login-btn-color {
+  background-color: #0e1c36;
+  color: #fff;
+}
+.user-profile-image-pic {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+.auth-card-body-color {
+  background-color: #ebf2fa;
+}
